@@ -1,5 +1,5 @@
-# Demo Application for Solid CSS
-Demo Application to interact with Community Solid Server using Verifiable Credentials.
+# Demo Issuer
+Demo Issuer to release Verifiable Credentials usable in the authentication required by Community Solid Server.
 Similarly to the other packages of this project, it requires updated version of the four libraries.
 ```
 credo-ts-core-0.5.3.tgz
