@@ -1,0 +1,10 @@
+{
+  "wallet": {
+    "id": "<YOUR WALLET LABEL>",
+    "key": "<YOUR WALLET KEY>",
+    "seed_private_key": "<YOUR 32 CHAR SEED PRIVATE KEY>",
+    "endpoint": "<YOUR ENDPOINT>",
+    "ledger_url": "http://test.bcovrin.vonx.io/genesis"
+  }
+}
+
