@@ -1,5 +1,5 @@
 {
-  "name": "solid-demo-application",
+  "name": "demo-app",
   "version": "1.0.0",
   "description": "Demo Application to interact with Community Solid Server using Verifiable Credentials",
   "main": "index.js",
