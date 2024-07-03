@@ -1,7 +1,7 @@
 {
-  "name": "solid-demo-application",
+  "name": "demo-ttp",
   "version": "1.0.0",
-  "description": "Demo Application to interact with Community Solid Server using Verifiable Credentials",
+  "description": "Demo TTP to verify the message encrypted from the CSS",
   "main": "index.js",
   "author": "Biagio Boi",
   "license": "MIT",
