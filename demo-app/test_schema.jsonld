@@ -1,0 +1,40 @@
+{
+  "@context": {
+    "@version":  1.1,
+    "@protected": true,
+    "id": "@id",
+    "type": "@type",
+    "SolidACPContext": {
+        "@id": "https://www.w3.org/ns/solid/acp#Context",
+        "@context": {
+            "@version": 1.1,
+            "@protected": true,
+            "id": "@id",
+            "type": "@type",
+            "acp": "https://www.w3.org/ns/solid/acp#",
+            "attribute": {"@id" : "acp:attribute", "@type" : "@id"},
+            "target": {"@id" : "acp:target", "@type" : "@id"},
+            "agent": {"@id" : "acp:agent", "@type" : "@id"},
+            "creator": {"@id" : "acp:creator", "@type" : "@id"},
+            "owner": {"@id" : "acp:owner", "@type" : "@id"},
+            "client": {"@id" : "acp:client", "@type" : "@id"},
+            "issuer": {"@id" : "acp:issuer", "@type" : "@id"},
+            "vc": {"@id" : "acp:vc", "@type": "@id"}
+        }
+    },
+    "SolidACPAccessControlResource": {
+        "@id": "https://www.w3.org/ns/solid/acp#AccessControlResource",
+        "@context": {
+            "@version": 1.1,
+            "@protected": true,
+            "id": "@id",
+            "type": "@type",
+            "acp": "https://www.w3.org/ns/solid/acp#",
+            "resource": {"@id" : "acp:resource", "@type" : "@id"},
+            "accessControl": {"@id" : "acp:accessControl", "@type" : "@id"},
+            "memberAccessControl": {"@id" : "acp:memberAccessControl", "@type" : "@id"}
+        }
+    }
+
+  }
+}
