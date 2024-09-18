@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig",
+  "include": [
+    "declarations.d.ts",
+    "index.ts",
+    "lib/**/*.ts",
+    "lib/**/*.js",
+  ],
+  "exclude": [
+    "node_modules/**",
+    "coverage/**",
+    "resources/**",
+    "dist/**",
+    "test/**"
+  ],
+
+}

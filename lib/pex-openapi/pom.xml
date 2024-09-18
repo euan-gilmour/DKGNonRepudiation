@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.sphereon.public</groupId>
+  <artifactId>pex-openapi</artifactId>
+  <packaging>jar</packaging>
+  <version>2.2.4</version>
+
+  <parent>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <groupId>org.springframework.boot</groupId>
+    <version>2.7.6</version>
+  </parent>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>sonatype-snapshots</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+    </pluginRepository>
+    <pluginRepository>
+      <id>maven-central</id>
+      <name>Maven Central</name>
+      <url>https://repo1.maven.org/maven2/</url>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <properties>
+    <swagger-codegen-verbose>false</swagger-codegen-verbose>
+    <openapi-generator-version>6.6.0</openapi-generator-version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <springfox-version>2.8.0</springfox-version>
+    <swagger-annotations-version>1.6.12</swagger-annotations-version>
+    <swagger-parser.version>2.1.19</swagger-parser.version>
+    <jackson.version>2.16.0</jackson.version>
+    <pex-models-version>2.1.5</pex-models-version>
+    <open-api-address>${project.basedir}/openapi/pex-openapi.yaml</open-api-address>
+  </properties>
+
+  <distributionManagement>
+    <repository>
+      <id>sphereon-opensource-releases</id>
+      <url>https://nexus.qa.sphereon.com/nexus/content/repositories/sphereon-opensource-releases</url>
+    </repository>
+    <snapshotRepository>
+      <id>sphereon-opensource-snapshots</id>
+      <url>https://nexus.qa.sphereon.com/repository/sphereon-opensource-snapshots/</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <scm>
+    <connection>scm:git:git@github.com:Sphereon-Opensource/pex-openapi.git</connection>
+    <developerConnection>scm:git:git@github.com:Sphereon-Opensource/pex-openapi.git</developerConnection>
+    <url>https://github.com/Sphereon-Opensource/pex-openapi</url>
+  </scm>
+
+  <dependencies>
+    <dependency>
+      <artifactId>swagger-annotations</artifactId>
+      <groupId>io.swagger</groupId>
+      <version>${swagger-annotations-version}</version>
+    </dependency>
+
+    <dependency>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <groupId>org.springframework.boot</groupId>
+    </dependency>
+
+    <dependency>
+      <artifactId>spring-data-commons</artifactId>
+      <groupId>org.springframework.data</groupId>
+    </dependency>
+    <!--SpringFox dependencies -->
+    <dependency>
+      <artifactId>springfox-swagger2</artifactId>
+      <groupId>io.springfox</groupId>
+      <version>${springfox-version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>springfox-swagger-ui</artifactId>
+      <groupId>io.springfox</groupId>
+      <version>${springfox-version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>jaxb-api</artifactId>
+      <groupId>javax.xml.bind</groupId>
+      <version>2.2.11</version>
+    </dependency>
+    <dependency>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>jackson-databind-nullable</artifactId>
+      <groupId>org.openapitools</groupId>
+      <version>0.1.0</version>
+    </dependency>
+    <dependency>
+      <artifactId>validation-api</artifactId>
+      <groupId>javax.validation</groupId>
+    </dependency>
+  </dependencies>
+  <profiles>
+    <profile>
+      <id>spring-java</id>
+      <build>
+        <pluginManagement>
+        </pluginManagement>
+        <plugins>
+          <plugin>
+            <artifactId>openapi-generator-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <configuration>
+                  <configOptions>
+                    <addCompileSourceRoot>true</addCompileSourceRoot>
+                    <apiPackage>com.sphereon.pex.handler</apiPackage>
+                    <artifactVersion>${project.version}</artifactVersion>
+
+                    <artifactVersion>${project.version}</artifactVersion>
+                    <documentationProvider>springfox</documentationProvider>
+
+                    <enablePostProcessFile>true</enablePostProcessFile>
+                    <generateApis>true</generateApis>
+                    <generateModelDocumentation>true</generateModelDocumentation>
+                    <generateModels>true</generateModels>
+
+                    <generateSupportingFiles>true</generateSupportingFiles>
+
+                    <invokerPackage>com.sphereon.pex.handler</invokerPackage>
+                    <modelPackage>com.sphereon.pex.model</modelPackage>
+                    <output>${project.basedir}/target/sdks/java/api</output>
+
+                    <serializableModel>true</serializableModel>
+                    <skipOverwrite>false</skipOverwrite>
+                    <snapshotVersion>true</snapshotVersion>
+                    <verbose>${swagger-codegen-verbose}</verbose>
+                  </configOptions>
+                  <generatorName>spring</generatorName>
+                  <inputSpec>${open-api-address}</inputSpec>
+
+                </configuration>
+                <goals>
+                  <goal>generate</goal>
+                </goals>
+                <id>spring-server</id>
+              </execution>
+
+            </executions>
+            <groupId>org.openapitools</groupId>
+            <version>${openapi-generator-version}</version>
+          </plugin>
+          <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+              <proc>none</proc>
+              <source>1.8</source>
+              <target>1.8</target>
+            </configuration>
+            <groupId>org.apache.maven.plugins</groupId>
+            <version>3.8.1</version>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>models-typescript</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-resources-plugin</artifactId>
+            <version>3.2.0</version>
+            <executions>
+              <execution>
+                <id>process-resources</id>
+                <phase>generate-sources</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <outputDirectory>target/sdks/models/typescript</outputDirectory>
+                  <resources>
+                    <resource>
+                      <directory>template/models-typescript</directory>
+                      <filtering>true</filtering>
+                    </resource>
+                  </resources>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.openapitools</groupId>
+            <artifactId>openapi-generator-maven-plugin</artifactId>
+            <version>${openapi-generator-version}</version>
+            <dependencies>
+              <dependency>
+                <groupId>io.swagger.parser.v3</groupId>
+                <artifactId>swagger-parser</artifactId>
+                <version>${swagger-parser.version}</version>
+              </dependency>
+              <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+              </dependency>
+            </dependencies>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>generate</goal>
+                </goals>
+                <phase>generate-sources</phase>
+                <configuration>
+                  <inputSpec>${open-api-address}</inputSpec>
+
+                  <generatorName>typescript-angular</generatorName>
+
+                  <configOptions>
+                    <dateLibrary>java8</dateLibrary>
+                    <npmName>@sphereon/pex-models</npmName>
+                    <npmVersion>${pex-models-version}</npmVersion>
+                  </configOptions>
+                  <reservedWordsMappings>
+                    <reservedWordsMapping>enum=enum</reservedWordsMapping>
+                    <reservedWordsMapping>const=const</reservedWordsMapping>
+                  </reservedWordsMappings>
+
+                  <verbose>${swagger-codegen-verbose}</verbose>
+                  <output>${project.basedir}/target/sdks/models/typescript</output>
+
+                  <artifactVersion>${project.version}</artifactVersion>
+                  <addCompileSourceRoot>true</addCompileSourceRoot>
+
+                  <generateModels>true</generateModels>
+                  <generateApis>false</generateApis>
+                  <generateModelDocumentation>true</generateModelDocumentation>
+
+                  <skipOverwrite>false</skipOverwrite>
+
+                  <generateSupportingFiles>true</generateSupportingFiles>
+                  <supportingFilesToGenerate>models.ts</supportingFilesToGenerate>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>api-typescript</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-resources-plugin</artifactId>
+            <version>3.2.0</version>
+            <executions>
+              <execution>
+                <id>process-resources</id>
+                <phase>generate-sources</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <outputDirectory>target/sdks/models/typescript</outputDirectory>
+                  <resources>
+                    <resource>
+                      <directory>template/models-typescript</directory>
+                      <filtering>true</filtering>
+                    </resource>
+                  </resources>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.openapitools</groupId>
+            <artifactId>openapi-generator-maven-plugin</artifactId>
+            <version>${openapi-generator-version}</version>
+            <dependencies>
+              <dependency>
+                <groupId>io.swagger.parser.v3</groupId>
+                <artifactId>swagger-parser</artifactId>
+                <version>${swagger-parser.version}</version>
+              </dependency>
+              <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+              </dependency>
+            </dependencies>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>generate</goal>
+                </goals>
+                <phase>generate-sources</phase>
+                <configuration>
+                  <inputSpec>${open-api-address}</inputSpec>
+
+                  <generatorName>typescript-angular</generatorName>
+
+                  <configOptions>
+                    <dateLibrary>java8</dateLibrary>
+                    <npmName>@sphereon/pex-sdk</npmName>
+                    <npmVersion>${pex-models-version}</npmVersion>
+                  </configOptions>
+                  <reservedWordsMappings>
+                    <reservedWordsMapping>enum=enum</reservedWordsMapping>
+                    <reservedWordsMapping>const=const</reservedWordsMapping>
+                  </reservedWordsMappings>
+
+                  <verbose>${swagger-codegen-verbose}</verbose>
+                  <output>${project.basedir}/target/sdks/typescript</output>
+
+                  <artifactVersion>${project.version}</artifactVersion>
+                  <addCompileSourceRoot>true</addCompileSourceRoot>
+
+                  <generateModels>true</generateModels>
+                  <generateApis>true</generateApis>
+                  <generateModelDocumentation>true</generateModelDocumentation>
+
+                  <skipOverwrite>false</skipOverwrite>
+
+                  <generateSupportingFiles>true</generateSupportingFiles>
+                  <supportingFilesToGenerate>tsconfig.json,models.ts</supportingFilesToGenerate>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>

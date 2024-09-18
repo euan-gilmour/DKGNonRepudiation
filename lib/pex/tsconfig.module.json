@@ -1,0 +1,21 @@
+{
+  "extends": "./tsconfig",
+  "compilerOptions": {
+    "target": "esnext",
+    "outDir": "dist/module",
+    "module": "esnext"
+  },
+  "include": [
+    "declarations.d.ts",
+    "index.ts",
+    "lib/**/*.ts",
+    "lib/**/*.js",
+  ],
+  "exclude": [
+    "node_modules/**",
+    "coverage/**",
+    "resources/**",
+    "dist/**",
+    "test/**"
+  ],
+}

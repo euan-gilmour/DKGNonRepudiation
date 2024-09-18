@@ -1,0 +1,13 @@
+.vscode/*
+.idea/*
+*.iml
+.nyc_output
+build
+dist
+node_modules
+coverage
+*.log
+*.tgz
+/lib/validation/*.js
+/resources/FilterV1.schema.json
+/resources/FilterV2.schema.json
