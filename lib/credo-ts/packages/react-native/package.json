@@ -1,0 +1,43 @@
+{
+  "name": "@credo-ts/react-native",
+  "main": "build/index",
+  "types": "build/index",
+  "version": "0.5.3",
+  "files": [
+    "build"
+  ],
+  "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://github.com/openwallet-foundation/credo-ts/tree/main/packages/react-native",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/openwallet-foundation/credo-ts",
+    "directory": "packages/react-native"
+  },
+  "scripts": {
+    "build": "yarn run clean && yarn run compile",
+    "clean": "rimraf ./build",
+    "compile": "tsc -p tsconfig.build.json",
+    "prepublishOnly": "yarn run build",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@azure/core-asynciterator-polyfill": "^1.0.2",
+    "@credo-ts/core": "0.5.3",
+    "events": "^3.3.0"
+  },
+  "devDependencies": {
+    "react-native": "^0.71.4",
+    "react-native-fs": "^2.20.0",
+    "react-native-get-random-values": "^1.8.0",
+    "rimraf": "^4.4.0",
+    "typescript": "~4.9.5"
+  },
+  "peerDependencies": {
+    "react-native": ">=0.71.4",
+    "react-native-fs": "^2.20.0",
+    "react-native-get-random-values": "^1.8.0"
+  }
+}

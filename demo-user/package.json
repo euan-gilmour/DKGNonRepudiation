@@ -8,8 +8,8 @@
     "@hyperledger/anoncreds-nodejs": "^0.2.2",
     "@hyperledger/aries-askar-nodejs": "^0.2.1",
     "@hyperledger/indy-vdr-nodejs": "^0.2.2",
-    "@sphereon/pex": "file:sphereon-pex-3.3.3.tgz",
-    "@sphereon/pex-models": "file:sphereon-pex-models-2.2.4.tgz",
+    "@sphereon/pex": "file:./../lib/sphereon-pex-3.3.3.tgz",
+    "@sphereon/pex-models": "file:./../lib/sphereon-pex-models-2.2.4.tgz",
     "@veramo/core": "^6.0.0",
     "@veramo/credential-ld": "^6.0.0",
     "@veramo/credential-w3c": "^6.0.0",
@@ -35,7 +35,7 @@
     "@credo-ts/anoncreds": "*",
     "@credo-ts/askar": "*",
     "@credo-ts/cheqd": "*",
-    "@credo-ts/core": "file:credo-ts-core-0.5.3.tgz",
+    "@credo-ts/core": "file:./../lib/credo-ts-core-0.5.3.tgz",
     "@credo-ts/indy-vdr": "*",
     "@credo-ts/node": "*",
     "@types/figlet": "^1.5.4",
@@ -44,5 +44,12 @@
     "figlet": "^1.5.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
+  },
+  "resolutions": {
+    "@digitalcredentials/vc": "file:./../lib/digitalcredentials-vc-7.0.0.tgz",
+    "@sphereon/pex": "file:./../lib/sphereon-pex-3.3.3.tgz",
+    "@sphereon/pex-models": "file:./../lib/sphereon-pex-models-2.2.4.tgz",
+    "@credo-ts/core": "file:./../lib/credo-ts-core-0.5.3.tgz",
+    "@credo-ts/askar": "file:./../lib/credo-ts-askar-0.5.3.tgz"
   }
 }

@@ -69,8 +69,9 @@ npm pack
 
 The expected result is that a file `/target/sdks/models/typescript/sphereon-pex-models-2.2.4.tgz`
 
-Copy this file in the pex project folder  or use the following command.
+Copy this file in the pex project folder and in lib folder or use the following command.
 
 ```bash
 cp ./sphereon-pex-models-2.2.4.tgz ./../../../../../pex/sphereon-pex-models-2.2.4.tgz
+cp ./sphereon-pex-models-2.2.4.tgz ./../../../../../sphereon-pex-models-2.2.4.tgz
 ```

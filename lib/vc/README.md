@@ -60,7 +60,7 @@ npm pack
 This will generate the file `digitalcredentials-vc-7.0.0.tgz`, that must be copied in the main folder of the project for the final building.
 
 ```
-cp ./digitalcredentials-vc-7.0.0.tgz ./../../digitalcredentials-vc-7.0.0.tgz
+cp ./digitalcredentials-vc-7.0.0.tgz ./../digitalcredentials-vc-7.0.0.tgz
 ```
 
 
