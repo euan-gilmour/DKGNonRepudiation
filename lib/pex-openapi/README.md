@@ -61,6 +61,7 @@ mvn clean install -P models-typescript
 ```
 cp patch/*.ts target/sdks/models/typescript/model/
 cd target/sdks/models/typescript
+
 npm install
 npm run build
 npm pack

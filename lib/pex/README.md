@@ -82,3 +82,9 @@ pnpm install
 yarn build
 npm pack
 ```
+
+This will generate the file `sphereon-pex-3.3.3.tgz`, that must be copied in the main folder of the project for the final building.
+
+```
+cp ./sphereon-pex-3.3.3.tgz ./../sphereon-pex-3.3.3.tgz
+```
