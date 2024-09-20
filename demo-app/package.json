@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@credo-ts/anoncreds": "*",
-    "@credo-ts/askar": "*",
+    "@credo-ts/askar": "file:./../lib/credo-ts-askar-0.5.3.tgz",
     "@credo-ts/cheqd": "*",
     "@credo-ts/core": "file:./../lib/credo-ts-core-0.5.3.tgz",
     "@credo-ts/indy-vdr": "*",

@@ -12,6 +12,7 @@
     "start-express": "node src/app.js"
   },
   "dependencies": {
+    "@digitalcredentials/vc": "file:./../lib/digitalcredentials-vc-7.0.0.tgz",
     "@hyperledger/anoncreds-nodejs": "^0.2.2",
     "@hyperledger/aries-askar-nodejs": "^0.2.1",
     "@hyperledger/indy-vdr-nodejs": "^0.2.2",
@@ -28,7 +29,7 @@
   },
   "devDependencies": {
     "@credo-ts/anoncreds": "*",
-    "@credo-ts/askar": "^0.5.3",
+    "@credo-ts/askar": "file:./../lib/credo-ts-askar-0.5.3.tgz",
     "@credo-ts/cheqd": "*",
     "@credo-ts/core": "file:./../lib/credo-ts-core-0.5.3.tgz",
     "@credo-ts/indy-vdr": "*",
