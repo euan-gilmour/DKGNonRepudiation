@@ -25,3 +25,9 @@ It is a demo for the wallet of the user, which receives credentials, create new 
 
 ## Notice
 Regarding the library folder, it is important to know that the `.tgz` files you found there have been created by starting from the source code existing in the folder. If you are facing some trubelshoot, you can consider regenerating these files according to the documentation existing in each source code project.
+
+## TODO
+* On the Demo Application, the DIDs for wrapped VP are inserted manually, we have to automate this behaviour.
+* Create a DIDDocument to upload in building phase, so that one can easily upload it in its POD.
+* Manage multiple connection from all the parties in order to check the loads.
+* Save the non-repudiable message in a graph.
