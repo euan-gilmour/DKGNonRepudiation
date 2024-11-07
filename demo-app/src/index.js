@@ -104,7 +104,10 @@ async function VcBasedrequests() {
                                 $(".loader").css("display", "none").addClass("loader-almost-load").fadeIn();
                                 $("#responseVP").html(syntaxHighlight(JSON.stringify(data, undefined, 2)));
                                 let resource = await requestWithVP(url, JSON.stringify(data));
+                                console.log(resource);
                                 responseArea.innerHTML = resource;
+                                console.log("miaoo");
+
                                 window.setTimeout(() => {
                                     $(".loader-loaded").css("display", "none")
                                 }, 500);
@@ -178,6 +181,7 @@ async function VcBasedrequestsDID() {
                         $("#invitation").html("");
                         $(".label-loader").css("display", "none").html("Proof accepted, sending the request to the server").fadeIn();
                         $(".loader").css("display", "none").addClass("loader-almost-load").fadeIn();
+
                         responseArea.innerHTML = data.content;
                         window.setTimeout(() => {
                             $(".loader-loaded").css("display", "none")
@@ -293,6 +297,7 @@ async function speedTest() {
     //console.log('Sending request for the resource with a VP...');
     let resource = await requestWithVP(url, VP);
     //console.log(resource);
+
     responseArea.innerHTML = resource;
     let endTime = performance.now();
     //console.log(`End Time: ${endTime}`);

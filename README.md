@@ -14,6 +14,7 @@ The following dependencies are required
 - `python` version 3.10 (if you have multiple version specify the version 3.10 to yarn using `yarn config set python /path/to/python3.10`)
 
 The repository is structured into four folders, one per each agent of the system, plus a lib folder containing libraries needed for the project.
+For each of them, you can find the README inside the specific folder project.
 ### Demo App
 It is a demo of an app interacting with a Solid Community Solid Server.
 ### Demo Issuer

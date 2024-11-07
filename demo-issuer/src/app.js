@@ -120,6 +120,7 @@ const initializeIssuerAgent = async (ledgerUrl, endPoint) => {
             }
         })
         let created_dids = await agent.dids.getCreatedDids({method: 'web', did: did});
+        console.log(created_dids[0].didDocument, null, 2);
         console.log("This is the Issuer Wallet, it has this DID: " + created_dids[0].did);
     }
 
@@ -190,7 +191,7 @@ const express = require('express');
 const {randomUUID} = require("crypto");
 
 const app = express();
-const PORT = 8081;
+const PORT = 8080;
 startEverything().then(result => {
     /* Empty */
 })

@@ -58,6 +58,7 @@ const initializeUserAgentWeb = async (ledgerUrl, endPoint) => {
         },
         endpoints: [endPoint],
         autoUpdateStorageOnStartup: true,
+        logger: new ConsoleLogger(LogLevel.debug)
     }
 
     // A new instance of an agent is created here
@@ -117,7 +118,8 @@ const initializeUserAgentWeb = async (ledgerUrl, endPoint) => {
                 privateKey: TypedArrayEncoder.fromString(sys_config.get('wallet.seed_private_key'))
             }
         })
-    } catch {
+    } catch(e) {
+	console.log(e.stack);
         let didResp = await agent.dids.resolve(did);
         await agent.dids.resolveDidDocument(did)
 
@@ -131,6 +133,7 @@ const initializeUserAgentWeb = async (ledgerUrl, endPoint) => {
             }
         })
         let created_dids = await agent.dids.getCreatedDids({method: 'web', did: did});
+        console.log(created_dids[0].didDocument);
         console.log("This is the User Wallet, it has this DID: " + created_dids[0].did);
     }
 

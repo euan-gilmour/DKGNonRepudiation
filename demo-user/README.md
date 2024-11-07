@@ -1,6 +1,6 @@
-# Demo Issuer
-Demo Issuer to release Verifiable Credentials usable in the authentication required by Community Solid Server.
-Similarly to the other packages of this project, it requires updated version of the four libraries.
+# Demo User
+Demo User to save and interact with Verifiable Credentials usable in the authentication required by Community Solid Server.
+Similarly to the other packages of this project, it requires an updated version of the four libraries.
 ```
 credo-ts-core-0.5.3.tgz
 digitalcredentials-vc-7.0.0.tgz
@@ -13,7 +13,7 @@ yarn install
 ```
 
 Before to run the server, you have to rename the config file contained in ```config/custom.json``` to ```config/default.json```.
-Once you customized the parameters, then it is possible to start the server, which in first execution will print out the DIDDocument that you need to host in somewhere (I suggest did:web in you github repo, as existing in this under ```config/did.json```).
+Once you customize the parameters, then it is possible to start the server, which in first execution will print out the DIDDocument that you need to host in somewhere (I suggest did:web in you github repo, as existing in this under ```config/did.json```).
 
 ```bash
 node app.js

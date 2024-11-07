@@ -19,7 +19,7 @@ const {
     MediationRecipientModule, MediatorService, MediatorModule, OutOfBandEventTypes, PeerDidNumAlgo, ClaimFormat,
     CREDENTIALS_CONTEXT_V1_URL, WRAPPER_VP_CONTEXT_URL, W3cPresentationRequest, AgentMessage, Key, BasicMessage,
     TransportService, JwsService, Ed25519Jwk, DidExchangeProtocol, Attachment, JsonEncoder, DidKey, getJwkFromKey,
-    BasicMessageEventTypes
+    BasicMessageEventTypes, BaseLogger
 } = require('@credo-ts/core')
 const {
     AnonCredsCredentialFormatService,
@@ -39,6 +39,10 @@ const {anoncreds} = require('@hyperledger/anoncreds-nodejs')
 const {AnonCredsRsModule} = require('@credo-ts/anoncreds')
 const sys_config = require('config');
 const QRCode = require('qrcode');
+
+const express = require('express');
+var bodyParser = require('body-parser');
+
 const getGenesisTransaction = async (url) => {
     const response = await fetch(url)
     return await response.text()
@@ -70,8 +74,15 @@ const initializeIssuerAgent = async (ledgerUrl, endPoint) => {
     // Register a simple `Http` outbound transport
     agent.registerOutboundTransport(new HttpOutboundTransport())
 
+
+    const serverApp = express()
+    serverApp.use(express.json({limit: '50mb'}));
+    serverApp.use(express.json({limit: '50mb'}));
+    serverApp.use(bodyParser.json({limit: '50mb'}));
+    serverApp.use(bodyParser.urlencoded({limit: '50mb',extended: true, parameterLimit: 50000}));
+
     // Register a simple `Http` inbound transport
-    agent.registerInboundTransport(new HttpInboundTransport({port: 3010}))
+    agent.registerInboundTransport(new HttpInboundTransport({app: serverApp, port: 3010}))
 
 
     // Initialize the agent
@@ -129,6 +140,7 @@ const initializeIssuerAgent = async (ledgerUrl, endPoint) => {
             }
         })
         let created_dids = await agent.dids.getCreatedDids({method: 'web'});
+        console.log(created_dids[0].didDocument);
         console.log("This is the App Wallet, it has this DID: " + created_dids[0].did);
 
     }
@@ -144,7 +156,6 @@ async function startEverything() {
     //await activateListener(agent, false, true)
 }
 
-const express = require('express');
 const {randomUUID} = require("crypto");
 const domain = require("domain");
 const {W3cIssuerOptions} = require("@credo-ts/core/build/modules/vc/models/credential/W3cIssuer");
@@ -162,13 +173,14 @@ startEverything().then(result => {
     /* Empty */
 })
 app.use(express.static('public'))
-var bodyParser = require('body-parser');
 const OutOfBandEvents_1 = require("@credo-ts/core/build/modules/oob/domain/OutOfBandEvents");
 const {EnvelopeService} = require("@credo-ts/core/build/agent/EnvelopeService");
 const crypto = require("crypto");
+app.use(express.json({limit: '50mb'}));
+app.use(express.json({limit: '50mb'}));
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb',extended: true, parameterLimit: 50000}));
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
 app.get('/', (req, res) => {
     res.status(200);
     //let url = `/index.html?user=${user}&application=${application}&vcissuer=${vcissuer}&nonce=${encodeURIComponent(nonce)}&domain=${domain}&redirect_uri=${redirect_uri}&code=${encodeURIComponent(code)}`;
@@ -226,7 +238,6 @@ app.post('/generateInvitation', async (req, res) => {
 });
 
 async function ourListener(payload, req, res) {
-
     if (payload.connectionRecord.state === DidExchangeState.Completed) {
         //console.log(await agent.connections.rotate({connectionId: payload.connectionRecord.id}));
         /* Start by sending a proof request, if we want to assess the identity */
@@ -292,7 +303,7 @@ async function ourListener(payload, req, res) {
                 {
                     wrappedVPR: wrapped_VPR,
                     proofType: 'Ed25519Signature2018',
-                    verificationMethod: 'did:web:secureapp.solidcommunity.net:public#z6Mkg4kRxcfvWfqTV86RdBKHjTks5thJe7R4xsGTs5zASrB7',
+                    verificationMethod: 'did:web:secureapp.solidcommunity.net:public#z6Mkk8ciwo7EcYj85GM72z9AyYrD7mjYAcn9op14pXDPrDc4',
                 }
             )
             /* Send it to the user */
@@ -329,7 +340,7 @@ async function ourListener(payload, req, res) {
                         presentationToSend = await agent.w3cCredentials.signWrappedPresentation({
                             presentation: wrappedVP,
                             format: ClaimFormat.LdpVp,
-                            verificationMethod: 'did:web:secureapp.solidcommunity.net:public#z6Mkg4kRxcfvWfqTV86RdBKHjTks5thJe7R4xsGTs5zASrB7',
+                            verificationMethod: 'did:web:secureapp.solidcommunity.net:public#z6Mkk8ciwo7EcYj85GM72z9AyYrD7mjYAcn9op14pXDPrDc4',
                             challenge: presentationParsed.proof.challenge,
                             domain: presentationParsed.proof.domain,
                             proofType: "Ed25519Signature2018",
@@ -360,6 +371,7 @@ app.post('/requestUserCredential', async (req, res) => {
     });*/
 
     agent.events.on(ConnectionEventTypes.ConnectionStateChanged, async ({payload}) => {
+
         await ourListener(payload, req, res);
     });
 
