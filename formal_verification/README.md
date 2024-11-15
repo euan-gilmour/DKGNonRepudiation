@@ -20,6 +20,16 @@ It is possible to check the output of our protocol [here](log/log.txt)
 | Authentication User  | Yes  | The app is able to authenticate the user. |
 ### DIDComm
 The greatest difference with respect to HTTPS is that in this version we do not use encryption of the entire packet since we leverage the in-line encryption of the protocol presented in [[https://identity.foundation/didcomm-messaging/spec/ | DIDComm Spec v.2 ]]. In particular, the content of the message is encrypted using XChaCha20Poly1305 with a 256 bit key (XC20P), which guarantee anonymity and encryption; while the symmetric key is wrapped according to ECDH-ES+A256KW. The information about the symmetric key used ($k_i$) for the encryption are contained in the first part of the message, while $iv_i$ is sent in plaintext.
-To authenticate the party and to establish a session key, the session public key to be used to encrypt the new messages is encrypted using the long-live public key of the other party (CSS), as shown in the message $\{g^{sav}\}_{pk(sk_v)}$. Similarly, the other party (CSS) encrypt the session public key using the long-live public key of the App.
+To authenticate the party and to establish a session key, the session public key to be used to encrypt the new messages is encrypted using the long-live public key of the other party (CSS), as shown in the message $\{g^{sav}\}_{pk(sk_v)}$. Similarly, the other party (CSS) encrypt the session public key using the long-live public key of the App. Both leverages the Diffie-Hellman Key Agreement according to ECDH-ES+A256KW.
 
 ![MSC of ...](msc/msc_didcomm.png)
+
+To model the modular exponentiation, we leveraged Diffie-Hellman key. A principal $A$ (App) chooses a random exponent $a \in Z_q^*$ , and sends $g^a$ to $B$ (CSS). Similarly, B chooses a random exponent $b \in Z_q^*$, and sends $g^b$ to $A$. Then $A$ computes $(g^b)^a$ and $B$ computes $(g^a)^b$ . These two keys are equal, since $(g^b)^a =(g^a)^b$ , and cannot be obtained by a passive attacker who has $g^a$ and $g^b$ but neither $a$ nor $b$. It is possible to model it into ProVerif as follow:
+```ProVerif
+type G.
+type exponent.
+const g: G[data].
+fun exp(G, exponent): G.
+
+equation forall x:exponent, y:exponent; exp(exp(g, x), y) = exp(exp(g, y), x).
+```
