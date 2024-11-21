@@ -8,7 +8,7 @@
     {
       "id": "did:web:raw.githubusercontent.com:biagioboi:DKGNonRepudiation:main:demo-ttp:config#z6MkjZpNhB8hcTSAVKiPPA8h7VYtiT43TUTAc87N872iw9rh",
       "type": "Ed25519VerificationKey2018",
-      "controller": "did:web:raw.githubusercontent.com:biagioboi:demo-ttp:main:config",
+      "controller": "did:web:raw.githubusercontent.com:biagioboi:DKGNonRepudiation:main:demo-ttp:config",
       "publicKeyBase58": "67ZL6vtGGuwhNpsghbArGPzttsnC3bCov7CSHq4i1w5K"
     }
   ],
